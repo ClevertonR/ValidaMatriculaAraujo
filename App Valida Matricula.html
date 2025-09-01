@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validação de Matrícula</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-image: url('https://www.sweetprocess.com/wp-content/uploads/2024/03/Picture15.png'); /* Adiciona a imagem de fundo */
+            background-size: cover; /* Faz a imagem cobrir toda a área */
+            background-position: center; /* Centraliza a imagem */
+            height: 100vh; /* Altura total da tela */
+            display: flex; /* Permite centralizar o conteúdo */
+            align-items: center; /* Alinha verticalmente ao centro */
+            justify-content: center; /* Alinha horizontalmente ao centro */
+        }
+        .container {
+            max-width: 450px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9); /* Fundo branco com leve transparência */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra ao redor do contêiner */
+        }
+        h1 {
+            margin-bottom: 20px;
+			color: #007BFF;
+            text-align: center; /* Centraliza o título */
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            width: 55%; /* Ajusta a largura para ocupar 100% do contêiner */
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        select {
+            width: 40%; /* Mantém a largura do select igual ao input */
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .resultado-container {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        .resultado-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        iframe {
+            width: 100%;
+            height: 250px;
+            border: none;
+            border-radius: 8px;
+            display: none; /* Esconder o iframe inicialmente */
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Validar Perfil por Matrícula</h1>
+        <label for="perfil">Selecione o perfil:</label>
+        <select id="perfil">
+            <option value="gerente">Gerente</option>
+            <option value="motorista">Motorista</option>
+        </select>
+        <label for="matricula">Insira a matrícula:</label>
+        <input type="text" id="matricula" placeholder="Insira a Matrícula (ex: 00442747)" maxlength="100"> <!-- Alterado para 100 -->
+        <button id="validar">Validar Perfil</button>
+        <div class="resultado-container" id="resultadoContainer" style="display: none;">
+            <div class="resultado-title">Resultado de Perfil (JSON)</div>
+            <iframe id="resultado" src=""></iframe>
+        </div>
+    </div>
+    <script>
+        document.getElementById('validar').addEventListener('click', function() {
+            const matricula = document.getElementById('matricula').value;
+            const perfil = document.getElementById('perfil').value;
+            let url = '';
+
+            if (perfil === 'gerente') {
+                url = `http://gn-coletorfuncionalidadescomunsapi.prd.araujo.com.br/crachas/usuario?matricula=${matricula}&incluirPerfis=true`;
+            } else if (perfil === 'motorista') {
+                url = `http://gn-coletorfuncionalidadescomunsapi.prd.araujo.com.br/crachas/validacao-por-matricula?matricula=${matricula}&perfil=TRANSPORTADOR`;
+            }
+
+            const iframe = document.getElementById('resultado');
+            iframe.src = url; // Define a URL do iframe
+            document.getElementById('resultadoContainer').style.display = 'block'; // Exibe o contêiner de resultados
+            iframe.style.display = 'block'; // Exibe o iframe
+        });
+    </script>
+</body>
+</html>
