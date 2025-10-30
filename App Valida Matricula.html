@@ -25,10 +25,16 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra ao redor do contêiner */
         }
         h1 {
-            margin-bottom: 20px;
-			color: #007BFF;
-            text-align: center; /* Centraliza o título */
-        }
+           margin-bottom: 30px;
+           margin-top: 10px;
+           color: #007BFF;
+           text-align: center;
+           font-size: 28px;
+           font-weight: bold;
+           text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra suave */
+           padding: 10px;
+           border-bottom: 2px solid #007BFF;
+           }
         label {
             display: block;
             margin-bottom: 10px;
@@ -88,7 +94,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Validar Perfil por Matrícula</h1>
+        <h1>VALIDAR PERFIL POR MATRICULA</h1>
         <label for="perfil">Selecione o perfil:</label>
         <select id="perfil">
             <option value="gerente">Gerente</option>
@@ -101,7 +107,9 @@
             <div class="resultado-title">Resultado de Perfil (JSON)</div>
             <iframe id="resultado" src=""></iframe>
         </div>
+		<footer>by: Cleverton .R. Silva</footer>
     </div>
+	
     <script>
         document.getElementById('validar').addEventListener('click', function() {
             const matricula = document.getElementById('matricula').value;
@@ -119,6 +127,8 @@
             document.getElementById('resultadoContainer').style.display = 'block'; // Exibe o contêiner de resultados
             iframe.style.display = 'block'; // Exibe o iframe
         });
+		
+		
     </script>
 </body>
 </html>
